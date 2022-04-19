@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thylovezj.hospital.model.dao.EvaluateMapper">
+  <resultMap id="BaseResultMap" type="com.thylovezj.hospital.model.pojo.Evaluate">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="evaluate_id" jdbcType="INTEGER" property="evaluateId" />
+    <result column="be_evaluated_id" jdbcType="INTEGER" property="beEvaluatedId" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, evaluate_id, be_evaluated_id, score, `comment`, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from xdu_hospital_evaluate
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from xdu_hospital_evaluate
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.thylovezj.hospital.model.pojo.Evaluate">
+    insert into xdu_hospital_evaluate (id, evaluate_id, be_evaluated_id, 
+      score, `comment`, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{evaluateId,jdbcType=INTEGER}, #{beEvaluatedId,jdbcType=INTEGER}, 
+      #{score,jdbcType=INTEGER}, #{comment,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.thylovezj.hospital.model.pojo.Evaluate">
+    insert into xdu_hospital_evaluate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="evaluateId != null">
+        evaluate_id,
+      </if>
+      <if test="beEvaluatedId != null">
+        be_evaluated_id,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="comment != null">
+        `comment`,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="evaluateId != null">
+        #{evaluateId,jdbcType=INTEGER},
+      </if>
+      <if test="beEvaluatedId != null">
+        #{beEvaluatedId,jdbcType=INTEGER},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.thylovezj.hospital.model.pojo.Evaluate">
+    update xdu_hospital_evaluate
+    <set>
+      <if test="evaluateId != null">
+        evaluate_id = #{evaluateId,jdbcType=INTEGER},
+      </if>
+      <if test="beEvaluatedId != null">
+        be_evaluated_id = #{beEvaluatedId,jdbcType=INTEGER},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null">
+        `comment` = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.thylovezj.hospital.model.pojo.Evaluate">
+    update xdu_hospital_evaluate
+    set evaluate_id = #{evaluateId,jdbcType=INTEGER},
+      be_evaluated_id = #{beEvaluatedId,jdbcType=INTEGER},
+      score = #{score,jdbcType=INTEGER},
+      `comment` = #{comment,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -19,6 +19,8 @@ public class Problem {
 
     private String check;
 
+    private String score;
+
     public Long getId() {
         return id;
     }
@@ -81,5 +83,13 @@ public class Problem {
 
     public void setCheck(String check) {
         this.check = check == null ? null : check.trim();
+    }
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score == null ? null : score.trim();
     }
 }

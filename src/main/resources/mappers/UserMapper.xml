@@ -126,4 +126,9 @@
       bonus = #{bonus,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="selectByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from xdu_hospital_user
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
 </mapper>

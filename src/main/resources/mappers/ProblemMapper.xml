@@ -10,9 +10,10 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="check" jdbcType="VARCHAR" property="check" />
+    <result column="score" jdbcType="VARCHAR" property="score" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, `name`, answer, `type`, doctor_id, create_time, update_time, `check`
+    id, `name`, answer, `type`, doctor_id, create_time, update_time, `check`, score
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -27,10 +28,12 @@
   <insert id="insert" parameterType="com.thylovezj.hospital.model.pojo.Problem">
     insert into xdu_hospital_problem (id, `name`, answer, 
       `type`, doctor_id, create_time, 
-      update_time, `check`)
+      update_time, `check`, score
+      )
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{answer,jdbcType=INTEGER}, 
       #{type,jdbcType=VARCHAR}, #{doctorId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{check,jdbcType=VARCHAR})
+      #{updateTime,jdbcType=TIMESTAMP}, #{check,jdbcType=VARCHAR}, #{score,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.thylovezj.hospital.model.pojo.Problem">
     insert into xdu_hospital_problem
@@ -59,6 +62,9 @@
       <if test="check != null">
         `check`,
       </if>
+      <if test="score != null">
+        score,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -84,6 +90,9 @@
       </if>
       <if test="check != null">
         #{check,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -111,6 +120,9 @@
       <if test="check != null">
         `check` = #{check,jdbcType=VARCHAR},
       </if>
+      <if test="score != null">
+        score = #{score,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -122,7 +134,8 @@
       doctor_id = #{doctorId,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      `check` = #{check,jdbcType=VARCHAR}
+      `check` = #{check,jdbcType=VARCHAR},
+      score = #{score,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

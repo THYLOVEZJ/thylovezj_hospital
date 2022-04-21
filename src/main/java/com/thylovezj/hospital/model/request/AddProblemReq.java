@@ -1,10 +1,8 @@
-package com.thylovezj.hospital.model.pojo;
+package com.thylovezj.hospital.model.request;
 
 import java.util.Date;
 
-public class Problem {
-    private Integer id;
-
+public class AddProblemReq {
     private String name;
 
     private Integer answer;
@@ -13,21 +11,9 @@ public class Problem {
 
     private Integer doctorId;
 
-    private Date createTime;
-
-    private Date updateTime;
-
     private String check;
 
     private String score;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -59,22 +45,6 @@ public class Problem {
 
     public void setDoctorId(Integer doctorId) {
         this.doctorId = doctorId;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
     }
 
     public String getCheck() {

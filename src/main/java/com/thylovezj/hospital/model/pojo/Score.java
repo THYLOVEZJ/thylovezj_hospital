@@ -3,7 +3,7 @@ package com.thylovezj.hospital.model.pojo;
 import java.util.Date;
 
 public class Score {
-    private Long id;
+    private Integer id;
 
     private Integer userId;
 
@@ -11,11 +11,11 @@ public class Score {
 
     private Date createTime;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

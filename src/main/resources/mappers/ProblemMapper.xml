@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thylovezj.hospital.model.dao.ProblemMapper">
+    <resultMap id="BaseResultMap" type="com.thylovezj.hospital.model.pojo.Problem">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="answer" jdbcType="INTEGER" property="answer"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="doctor_id" jdbcType="INTEGER" property="doctorId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="check" jdbcType="VARCHAR" property="check"/>
+        <result column="score" jdbcType="VARCHAR" property="score"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, `name`, answer, `type`, doctor_id, create_time, update_time, `check`, score
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from xdu_hospital_problem
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from xdu_hospital_problem
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.thylovezj.hospital.model.pojo.Problem">
+    insert into xdu_hospital_problem (id, `name`, answer, 
+      `type`, doctor_id, create_time, 
+      update_time, `check`, score
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{answer,jdbcType=INTEGER}, 
+      #{type,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{check,jdbcType=VARCHAR}, #{score,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.thylovezj.hospital.model.pojo.Problem">
+        insert into xdu_hospital_problem
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="answer != null">
+                answer,
+            </if>
+            <if test="type != null">
+                `type`,
+            </if>
+            <if test="doctorId != null">
+                doctor_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="check != null">
+                `check`,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="answer != null">
+                #{answer,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="doctorId != null">
+                #{doctorId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="check != null">
+                #{check,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.thylovezj.hospital.model.pojo.Problem">
+        update xdu_hospital_problem
+        <set>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="answer != null">
+                answer = #{answer,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                `type` = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="doctorId != null">
+                doctor_id = #{doctorId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="check != null">
+                `check` = #{check,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                score = #{score,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.thylovezj.hospital.model.pojo.Problem">
+    update xdu_hospital_problem
+    set `name` = #{name,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=INTEGER},
+      `type` = #{type,jdbcType=INTEGER},
+      doctor_id = #{doctorId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      `check` = #{check,jdbcType=VARCHAR},
+      score = #{score,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="calculateNum" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select count(*)
+    from xdu_hospital_problem
+    where type = #{type}
+  </select>
+    <select id="getProblem" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from xdu_hospital_problem
+    where type = #{type}
+    order by rand()
+    limit #{num}
+  </select>
+</mapper>
